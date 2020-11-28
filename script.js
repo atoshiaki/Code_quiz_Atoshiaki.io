@@ -2,8 +2,10 @@
 const sB = document.getElementById("start-btn")
 // nB = nextButton
 const nB = document.getElementById("next-btn")
-//hSB = highScorebutton
+// hSB = highScoreButton
 const hSB = document.getElementById("highScore-btn")
+// hSB = highScoreButton
+const save = document.getElementById("save-btn")
 // qCE = questionContainerElement
 const qCE = document.getElementById("questions-container")
 // qE = questionElement
@@ -13,6 +15,9 @@ const aBE = document.getElementById("answer-buttons")
 // sQ = shuffledQuestions, cQI = currentQuestionIndex
 let sQ, cQI
 
+document.getElementById("highScore-btn").onclick = function(){
+    location.href = "highscores.html";
+}
 sB.addEventListener("click", startQuiz)
 nB.addEventListener("click", () => {
   cQI++
@@ -67,6 +72,8 @@ function selectAnswer(e) {
   } else {
     sB.innerText = "Restart"
     sB.classList.remove("hide")
+    save.classList.remove("hide")
+    hSB.classList.remove("hide")
   }
 }
 
@@ -83,7 +90,6 @@ function clearStatusClass(element) {
   element.classList.remove("correct")
   element.classList.remove("wrong")
 }
-
 const questions = [
         {
         question: "when calling Javascript, what is the correct tag you would use?",
