@@ -14,7 +14,7 @@ const qE = document.getElementById("questions")
 const aBE = document.getElementById("answer-buttons")
 // sQ = shuffledQuestions, cQI = currentQuestionIndex
 let sQ, cQI
-
+let score = document.getElementById("score")
 document.getElementById("highScore-btn").onclick = function(){
     location.href = "highscores.html";
 }
@@ -25,71 +25,75 @@ nB.addEventListener("click", () => {
 })
 
 function startQuiz() {
-  sB.classList.add("hide")
-  hSB.classList.add("hide")
-  sQ = questions.sort(() => Math.random() - .5)
-  cQI = 0
-  qCE.classList.remove("hide")
-  setNextQuestion()
+    sB.classList.add("hide")
+    hSB.classList.add("hide")
+    sQ = questions.sort(() => Math.random() - .5)
+    cQI = 0
+    qCE.classList.remove("hide")
+    setNextQuestion()
 }
 
 function setNextQuestion() {
-  reset()
-  showQuestion(sQ[cQI])
+    reset()
+    showQuestion(sQ[cQI])
 }
 
 function showQuestion(questions) {
-  qE.innerText = questions.question
-  questions.answers.forEach(answer => {
-    const button = document.createElement("button")
-    button.innerText = answer.text
-    button.classList.add("btn")
-    if (answer.correct) {
-      button.dataset.correct = answer.correct
-    }
-    button.addEventListener("click", selectAnswer)
-    aBE.appendChild(button)
-  })
+    qE.innerText = questions.question
+    questions.answers.forEach(answer => {
+        const button = document.createElement("button")
+        button.innerText = answer.text
+        button.classList.add("btn")
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        }
+        button.addEventListener("click", selectAnswer)
+        aBE.appendChild(button)
+    })
 }
 
 function reset() {
-  clearStatusClass(document.body)
-  nB.classList.add("hide")
-  while (aBE.firstChild) {
-    aBE.removeChild(aBE.firstChild)
-  }
+    clearStatusClass(document.body)
+    nB.classList.add("hide")
+    while (aBE.firstChild) {
+        aBE.removeChild(aBE.firstChild)
+    }
 }
 
 function selectAnswer(e) {
-  const selectedButton = e.target
-  const correct = selectedButton.dataset.correct
-  setStatusClass(document.body, correct)
-  Array.from(aBE.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
-  })
-  if (sQ.length > cQI + 1) {
-    nB.classList.remove("hide")
-  } else {
+    const selectedButton = e.target
+    const correct = selectedButton.dataset.correct
+    setStatusClass(document.body, correct)
+    Array.from(aBE.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct)
+    })
+    if (sQ.length > cQI + 1) {
+        nB.classList.remove("hide")
+    } else {
     sB.innerText = "Restart"
     sB.classList.remove("hide")
     save.classList.remove("hide")
     hSB.classList.remove("hide")
-  }
+    }
+    if (correct) {
+        score = parseInt(score) + (25)
+        console.log(25)
+    }
 }
 
 function setStatusClass(element, correct) {
-  clearStatusClass(element)
-  if (correct) {
-    element.classList.add("correct")
-  } else {
-    element.classList.add("wrong")
-  }
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add("correct")
+    } else {
+        element.classList.add("wrong")
+    }
+}
+function clearStatusClass(element) {
+    element.classList.remove("correct")
+    element.classList.remove("wrong")
 }
 
-function clearStatusClass(element) {
-  element.classList.remove("correct")
-  element.classList.remove("wrong")
-}
 const questions = [
         {
         question: "when calling Javascript, what is the correct tag you would use?",

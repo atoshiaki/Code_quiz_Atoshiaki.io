@@ -24,7 +24,15 @@
   body.wrong {
     --hue: var(--hue-wrong);
   }
-  .container {
+  .container{
+      widows: 200px;
+      max-width: 20%;
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 0 10px 2px;
+  }
+  .container-2 {
     width: 800px;
     max-width: 80%;
     background-color: white;
