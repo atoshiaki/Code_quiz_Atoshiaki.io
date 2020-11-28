@@ -14,7 +14,8 @@ const qE = document.getElementById("questions")
 const aBE = document.getElementById("answer-buttons")
 // sQ = shuffledQuestions, cQI = currentQuestionIndex
 let sQ, cQI
-let score = document.getElementById("score")
+var base = document.getElementById("score");
+// link to highscore.html
 document.getElementById("highScore-btn").onclick = function(){
     location.href = "highscores.html";
 }
@@ -63,6 +64,7 @@ function reset() {
 function selectAnswer(e) {
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
+    adjustScore(correct)
     setStatusClass(document.body, correct)
     Array.from(aBE.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
@@ -75,12 +77,17 @@ function selectAnswer(e) {
     save.classList.remove("hide")
     hSB.classList.remove("hide")
     }
-    if (correct) {
-        score = parseInt(score) + (25)
-        console.log(25)
+}
+function adjustScore (correct){
+    var score = base.innerHTML;
+    var add = 25;
+    if(correct){
+        points = score + add
+        console.log("yay")
+    } else{
+        console.error()
     }
 }
-
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -93,7 +100,10 @@ function clearStatusClass(element) {
     element.classList.remove("correct")
     element.classList.remove("wrong")
 }
-
+function saveScore(){
+    localStorage.setItem("name", base.val());
+}
+var stored = localStorage.getItem("name", base);
 const questions = [
         {
         question: "when calling Javascript, what is the correct tag you would use?",
