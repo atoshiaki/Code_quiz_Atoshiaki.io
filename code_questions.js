@@ -1,7 +1,7 @@
 [
     {
-        title: "Primarily, inside which tag of an HTML document do you put the JavaScript?",
-        choices: ["<java>", "<body>", "<script>", "<img>"],
+        title: "Inside what tag of an HTML document do you put the JavaScript?",
+        choices: ["<div>", "<section>", "<script>", "<header>"],
         answer: "<script>"
     },
     {
@@ -15,18 +15,13 @@
         answer: "<script src='abc.js'>"
     },
     {
-        title: "Which type of pop up box will allow a user to type a response?",
-        choices: ["input", "prompt", "alert", "confirm"],
-        answer: "prompt"
-    },
-    {
-        title: "What is a DOM in JavaScript?",
-        choices: ["Data of Mine", "Document of Master", "Data Object Modal", "Document Object Model"],
-        answer: "Document Object Model"
-    },
-    {
         title: "Is JS case-sensitive?",
         choices: ["Yes", "No", "I have no clue", "Only when it feels like it."],
         answer: "Yes"
+    },
+        {
+        title: "Which type of pop up box will allow a user to type a response?",
+        choices: ["input", "prompt", "alert", "confirm"],
+        answer: "prompt"
     },
 ];

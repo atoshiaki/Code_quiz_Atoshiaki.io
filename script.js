@@ -1,6 +1,6 @@
-var startBtn = document.getElementById("startBtn");
-var submitBtn = document.querySelector("button.submitBtn")
-var secondsLeft = (questions.length * 15 + 1);
+var start = document.getElementById("start");
+var submit = document.querySelector("button.submit")
+var timeLeft = (questions.length * 15 + 1);
 var timerEl = document.getElementById("timer");
 var submitScoreEl = document.querySelector("#submit-score");
 var userScoreEl = document.getElementById("user-score");
@@ -17,9 +17,9 @@ function startTimer() {
 }
 function setTimer() {
     var countdown = setInterval(function () {
-        secondsLeft--;
-        timerEl.textContent = "Time: " + secondsLeft;
-        if (secondsLeft === 0 || questionNumber === questions.length) {
+        timeLeft--;
+        timerEl.textContent = "Time: " + timeLeft;
+        if (timeLeft === 0 || questionNumber === questions.length) {
             clearInterval(countdown);
             setTimeout(displayScore, 500);
         }
@@ -40,10 +40,10 @@ function makeQuestions() {
 function displayScore() {
     document.getElementById("quiz").classList.add('d-none');
     document.getElementById("submit-score").classList.remove('d-none');
-    userScoreEl.textContent = "Your final score is " + secondsLeft + ".";
+    userScoreEl.textContent = "Your final score is " + timeLeft + ".";
 }
-startBtn.addEventListener("click", startTimer);
-submitBtn.addEventListener("click", function (event) {
+start.addEventListener("click", startTimer);
+submit.addEventListener("click", function (event) {
     event.stopPropagation();
     addScore();
     window.location.href = './highscores.html'
@@ -53,7 +53,7 @@ function addScore () {
     // create a new object with name and score keys
 var newScore = {
         name: userNameInput,
-        score: secondsLeft
+        score: timeLeft
     };
     var highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
     highScores.push(newScore)
@@ -76,7 +76,7 @@ answerChoices.addEventListener("click", function (event) {
     } else {
         pEl.innerHTML = "Sorry, that's incorrect.";
         setTimeout(hideFeedback,1000);
-        secondsLeft = secondsLeft - 10;
+        timeLeft = timeLeft - 10;
         showFeedback();
     }    
     makeQuestions();
