@@ -2,6 +2,8 @@
 const sB = document.getElementById("start-btn")
 // nB = nextButton
 const nB = document.getElementById("next-btn")
+//hSB = highScorebutton
+const hSB = document.getElementById("highScore-btn")
 // qCE = questionContainerElement
 const qCE = document.getElementById("questions-container")
 // qE = questionElement
@@ -19,6 +21,7 @@ nB.addEventListener("click", () => {
 
 function startQuiz() {
   sB.classList.add("hide")
+  hSB.classList.add("hide")
   sQ = questions.sort(() => Math.random() - .5)
   cQI = 0
   qCE.classList.remove("hide")
@@ -31,7 +34,7 @@ function setNextQuestion() {
 }
 
 function showQuestion(questions) {
-  qE.innerText = questions.questions
+  qE.innerText = questions.question
   questions.answers.forEach(answer => {
     const button = document.createElement("button")
     button.innerText = answer.text
@@ -59,7 +62,7 @@ function selectAnswer(e) {
   Array.from(aBE.children).forEach(button => {
     setStatusClass(button, button.dataset.correct)
   })
-  if (nextButtonsQ.length > cQI + 1) {
+  if (sQ.length > cQI + 1) {
     nB.classList.remove("hide")
   } else {
     sB.innerText = "Restart"
@@ -83,23 +86,39 @@ function clearStatusClass(element) {
 
 const questions = [
         {
-        title: "when calling Javascript, what is the correct tag you would use?",
-        choices: ["<div>", "<section>", "<script>", "<header>"],
-        answer: "<script>"
+        question: "when calling Javascript, what is the correct tag you would use?",
+        answers: [
+            { text: "<div>", correct: false},
+            { text: "<section>", correct: false},
+            { text: "<script>", correct: true },
+            { text: "<header>", correct: false}
+        ]
     },
     {
-        title: "The condition in an if/else statement is enclosed within ______.",
-        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-        answer: "parentheses"
+        question: "The condition in an if/else statement is enclosed within ______.",
+        answers: [
+            { text: "quotes", correct: false},
+            { text: "brackets", correct: false},
+            { text: "parentheses", correct: true},
+            { text: "square brackets", correct: false}
+        ]
     },
     {
-        title: "Is JS case-sensitive?",
-        choices: ["Yes", "No", "I have no clue", "Only when it feels like it."],
-        answer: "Yes"
+        question: "Is JavaScript case-sensitive?",
+        answers: [
+            { text: "Yes", correct: true},
+            { text: "No", correct: false},
+            { text: "Idk", correct: false},
+            { text: "depends", correct: false}
+        ]
     },
         {
-        title: "Which type of pop up box will allow a user to type a response?",
-        choices: ["input", "prompt", "alert", "confirm"],
-        answer: "prompt"
-    },
+        question: "Which type of pop up, allows a user to type a response?",
+        answers: [
+            { text: "input", correct: false},
+            { text: "prompt", correct: true},
+            { text: "alert", correct: false},
+            { text: "confirm", correct: false}
+        ]
+    }
 ]
